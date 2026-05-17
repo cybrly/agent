@@ -1,0 +1,43 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { categoryBySlug } from '../../../lib/categories';
+
+export async function getStaticPaths() {
+  const sheets = await getCollection('cheatsheets');
+  return sheets.map((s) => ({
+    params: { category: s.data.category, slug: s.id.split('/').pop()! },
+    props: { sheet: s },
+  }));
+}
+
+const { sheet } = Astro.props;
+const cat = categoryBySlug(sheet.data.category)!;
+const { Content } = await render(sheet);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title={`${sheet.data.title} — PentestCheat`} description={sheet.data.description}>
+  <nav class="text-xs text-[var(--color-muted)] mb-3">
+    <a href={`${base}/`} class="hover:underline">Home</a> /
+    <a href={`${base}/c/${cat.slug}`} class="hover:underline">{cat.name}</a> /
+    <span>{sheet.data.title}</span>
+  </nav>
+
+  <article class="prose max-w-none">
+    <h1>{sheet.data.title}</h1>
+    {sheet.data.description && <p class="text-[var(--color-muted)] -mt-2">{sheet.data.description}</p>}
+    <div class="flex flex-wrap gap-1 mb-4">
+      {sheet.data.tags.map((t) => (
+        <a href={`${base}/tag/${t}`} class="px-1.5 py-0.5 text-[10px] rounded border" style="border-color: var(--color-border);">#{t}</a>
+      ))}
+      {sheet.data.ports.map((p) => (
+        <span class="px-1.5 py-0.5 text-[10px] rounded border mono" style="border-color: var(--color-border);">port :{p}</span>
+      ))}
+      {sheet.data.os.filter((o) => o !== 'any').map((o) => (
+        <span class="px-1.5 py-0.5 text-[10px] rounded border" style="border-color: var(--color-border);">{o}</span>
+      ))}
+    </div>
+    <hr/>
+    <Content />
+  </article>
+</Base>
