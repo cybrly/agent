@@ -150,7 +150,8 @@ sleep 1
 systemctl is-active --quiet unbound \
     || { journalctl -u unbound -n 40 --no-pager; exit 1; }
 
-PUB_IP="$(curl -fsS --max-time 5 https://ifconfig.me 2>/dev/null || hostname -I | awk '{print $1}')"
+PUB_IP="$(curl -4fsS --max-time 5 https://ifconfig.me 2>/dev/null || \
+         ip -4 -o addr show "${WAN_IF}" | awk '{print $4}' | cut -d/ -f1 | head -1)"
 
 cat <<EOF
 
