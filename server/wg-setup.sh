@@ -61,6 +61,7 @@ server:
     do-ip6: no
     do-tcp: yes
     do-udp: yes
+    ip-freebind: yes
     access-control: 0.0.0.0/0 refuse
     access-control: 127.0.0.0/8 allow
     access-control: ${WG_NET} allow
@@ -92,9 +93,6 @@ DNSStubListener=no
 EOF
     systemctl restart systemd-resolved
 fi
-
-systemctl enable --now unbound >/dev/null
-systemctl restart unbound
 
 echo ">> opening UDP/${WG_PORT} at netfilter"
 iptables -C INPUT -p udp --dport "${WG_PORT}" -j ACCEPT 2>/dev/null \
@@ -137,12 +135,20 @@ echo "added peer '${NAME}' (${PUB}) -> ${TUN_IP}"
 AEOF
 chmod +x /usr/local/bin/wg-add-peer
 
-echo ">> starting wg0"
+echo ">> starting wg0 (must precede unbound: unbound binds to the wg0 IP)"
 systemctl enable wg-quick@wg0 >/dev/null
 systemctl restart wg-quick@wg0
 sleep 1
 systemctl is-active --quiet wg-quick@wg0 \
     || { journalctl -u wg-quick@wg0 -n 40 --no-pager; exit 1; }
+
+echo ">> starting unbound"
+systemctl reset-failed unbound 2>/dev/null || true
+systemctl enable --now unbound >/dev/null
+systemctl restart unbound
+sleep 1
+systemctl is-active --quiet unbound \
+    || { journalctl -u unbound -n 40 --no-pager; exit 1; }
 
 PUB_IP="$(curl -fsS --max-time 5 https://ifconfig.me 2>/dev/null || hostname -I | awk '{print $1}')"
 
