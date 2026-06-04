@@ -11,15 +11,16 @@ No third-party dependencies (pure Python).
 """
 
 import struct
+import os
 
 # ----------------------------------------------------------------------------
-# Parameters (all in millimetres) -- edit these to customise.
+# Parameters (all in millimetres) -- edit these or override via env vars.
 # ----------------------------------------------------------------------------
 CARD_W = 85.60          # credit card long edge
 CARD_H = 53.98          # credit card short edge
 
-COLS = 6                # pockets across
-ROWS = 3                # pockets down
+COLS = int(os.environ.get("COLS", 6))   # pockets across
+ROWS = int(os.environ.get("ROWS", 3))   # pockets down
 
 ORIENTATION = "portrait"  # "portrait" -> cards stand tall, "landscape" -> wide
 
@@ -29,7 +30,7 @@ FLOOR_THICK = 2.00      # solid material below each pocket
 WALL = 4.00             # wall thickness between adjacent pockets
 BORDER = 6.00           # outer frame thickness around the whole grid
 
-OUTPUT = "credit_card_jig_6x3.stl"
+OUTPUT = os.environ.get("OUTPUT", f"credit_card_jig_{COLS}x{ROWS}.stl")
 
 # ----------------------------------------------------------------------------
 # Derived pocket footprint
