@@ -32,6 +32,16 @@ const DESIGNS = [
   { id: "beer-league",       name: "Future Beer League Legend", file: "assets/designs/beer-league-legend.png" },
   { id: "shutout-specialist",name: "Shutout Specialist",       file: "assets/designs/shutout-specialist.png" },
   { id: "tiny-human",        name: "Tiny Human, Large Opinions", file: "assets/designs/tiny-human.png" },
+  { id: "game-day",          name: "Game Day",                 file: "assets/designs/game-day.png",            personalize: true },
+  { id: "game-night",        name: "Game Night Ticket",        file: "assets/designs/game-night.png",          personalize: true },
+  { id: "arena-memory",      name: "Arena Memory",             file: "assets/designs/arena-memory.png",        personalize: true },
+  { id: "season-ticket-mem", name: "Season Ticket Memory",     file: "assets/designs/season-ticket-memory.png", personalize: true },
+  { id: "dream-night",       name: "Hockey Dream Night",       file: "assets/designs/dream-night.png",         personalize: true },
+  { id: "my-first-game",     name: "My First Hockey Game",     file: "assets/designs/my-first-game.png",       personalize: true },
+  { id: "team-pride",        name: "Team Pride Autograph",     file: "assets/designs/team-pride-autograph.png", personalize: true },
+  { id: "autograph-puck",    name: "Autograph Puck",           file: "assets/designs/autograph-puck.png",      personalize: true },
+  { id: "autograph-hunter",  name: "Future Autograph Hunter",  file: "assets/designs/autograph-hunter.png",    personalize: true },
+  { id: "warmups-sign",      name: "Puck for Warmups",         file: "assets/designs/warmups-sign.png",        personalize: true },
 ];
 
 /* ---- State ---- */
