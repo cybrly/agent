@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Puck Lab — Custom Designed Hockey Pucks</title>
+  <meta name="description" content="Custom designed hockey pucks made to order. Pick a ready-made design, upload your own art, or send us an idea. No minimum order — buy just one." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Puck Lab — Custom Designed Hockey Pucks" />
+  <meta property="og:description" content="Your design on a real hockey puck. No minimum order." />
+  <meta property="og:type" content="website" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Puck Lab home">
+        <img src="assets/favicon.svg" alt="" width="34" height="34" />
+        <span>Puck<strong>Lab</strong></span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#gallery">Designs</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-sm" href="#order">Start your puck</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Custom hockey pucks · made to order</p>
+        <h1>Your design.<br />On a real puck.</h1>
+        <p class="lede">
+          Regulation 3"&times;1" vulcanized rubber pucks, printed with whatever you
+          dream up. Pick one of our designs, upload your own art, or just tell us
+          your idea and we'll mock it up.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-lg" href="#order">Start your puck</a>
+          <a class="btn btn-ghost btn-lg" href="#gallery">Browse designs</a>
+        </div>
+        <ul class="hero-points">
+          <li>✓ No minimum — order a single puck</li>
+          <li>✓ Free design proof before you pay</li>
+          <li>✓ Ships in 5–7 business days</li>
+        </ul>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="puck-stack">
+          <div class="puck puck-3"></div>
+          <div class="puck puck-2"></div>
+          <div class="puck puck-1">
+            <div class="puck-face" id="heroPuckFace"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="section">
+    <div class="container">
+      <h2 class="section-title">Three ways to get your puck</h2>
+      <p class="section-sub">However your idea shows up, we can put it on a puck.</p>
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon">🎨</div>
+          <h3>Pick a design</h3>
+          <p>Choose from our ready-made artwork and add your own text. Fastest way to order.</p>
+          <a href="#gallery" class="card-link">Browse designs →</a>
+        </article>
+        <article class="card">
+          <div class="card-icon">⬆️</div>
+          <h3>Upload your own</h3>
+          <p>Got a logo, photo, or finished artwork? Upload it and we'll print it.</p>
+          <a href="#order" class="card-link">Upload art →</a>
+        </article>
+        <article class="card">
+          <div class="card-icon">💡</div>
+          <h3>Submit an idea</h3>
+          <p>Just describe what you want. We'll design it and send a free proof to approve.</p>
+          <a href="#order" class="card-link">Send an idea →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Ready-made designs</h2>
+      <p class="section-sub">Tap a design to load it into the builder below.</p>
+      <div class="gallery" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- Order / Builder -->
+  <section id="order" class="section">
+    <div class="container">
+      <h2 class="section-title">Build your puck</h2>
+      <p class="section-sub">Pick how you want to design it, preview it, and send your request. We'll reply with a proof &amp; quote — no payment yet.</p>
+
+      <div class="builder">
+        <!-- Live preview -->
+        <div class="preview-pane">
+          <div class="preview-puck">
+            <div class="preview-face" id="previewFace">
+              <span class="preview-placeholder" id="previewPlaceholder">Your design<br/>appears here</span>
+              <img id="previewImage" alt="Your puck design preview" />
+              <span class="preview-text" id="previewText"></span>
+            </div>
+          </div>
+          <p class="preview-caption">Live preview · not to scale</p>
+        </div>
+
+        <!-- Form -->
+        <form class="order-form" id="orderForm" novalidate>
+          <fieldset class="field">
+            <legend>1. How do you want to design it?</legend>
+            <div class="seg" role="tablist">
+              <label class="seg-opt">
+                <input type="radio" name="mode" value="gallery" checked />
+                <span>Pick a design</span>
+              </label>
+              <label class="seg-opt">
+                <input type="radio" name="mode" value="upload" />
+                <span>Upload my art</span>
+              </label>
+              <label class="seg-opt">
+                <input type="radio" name="mode" value="idea" />
+                <span>Submit an idea</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- Gallery picker (mode: gallery) -->
+          <div class="mode-panel" data-mode="gallery">
+            <label class="field">
+              <span class="label">Chosen design</span>
+              <div class="chosen" id="chosenDesign">
+                <span class="muted">No design selected — pick one from the gallery above.</span>
+              </div>
+            </label>
+          </div>
+
+          <!-- Upload (mode: upload) -->
+          <div class="mode-panel" data-mode="upload" hidden>
+            <label class="field">
+              <span class="label">Upload your artwork</span>
+              <div class="dropzone" id="dropzone">
+                <input type="file" id="fileInput" accept="image/png,image/jpeg,image/svg+xml,application/pdf" />
+                <p><strong>Click to choose</strong> or drag a file here</p>
+                <p class="muted small">PNG, JPG, SVG or PDF · up to 10&nbsp;MB</p>
+                <p class="file-name" id="fileName"></p>
+              </div>
+            </label>
+          </div>
+
+          <!-- Idea (mode: idea) -->
+          <div class="mode-panel" data-mode="idea" hidden>
+            <label class="field">
+              <span class="label">Describe your idea</span>
+              <textarea id="ideaText" name="idea" rows="4" placeholder="e.g. A wolf howling at the moon in blue and silver, with 'Northside Hockey' around the edge."></textarea>
+            </label>
+          </div>
+
+          <!-- Custom text (all modes) -->
+          <label class="field">
+            <span class="label">Add text on the puck <span class="muted">(optional)</span></span>
+            <input type="text" id="customText" maxlength="24" placeholder="Name, number, team, date…" />
+          </label>
+
+          <!-- Quantity -->
+          <label class="field field-qty">
+            <span class="label">Quantity <span class="muted">(no minimum — even one is fine)</span></span>
+            <div class="qty">
+              <button type="button" class="qty-btn" data-step="-1" aria-label="Decrease quantity">−</button>
+              <input type="number" id="qty" value="1" min="1" step="1" inputmode="numeric" />
+              <button type="button" class="qty-btn" data-step="1" aria-label="Increase quantity">+</button>
+            </div>
+          </label>
+
+          <hr class="rule" />
+
+          <!-- Contact -->
+          <div class="grid-2">
+            <label class="field">
+              <span class="label">Your name</span>
+              <input type="text" id="name" name="name" autocomplete="name" required />
+            </label>
+            <label class="field">
+              <span class="label">Email</span>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+            </label>
+          </div>
+          <label class="field">
+            <span class="label">Anything else? <span class="muted">(optional)</span></span>
+            <textarea id="notes" name="notes" rows="2" placeholder="Colors, deadline, sizing questions…"></textarea>
+          </label>
+
+          <p class="form-error" id="formError" role="alert" hidden></p>
+
+          <button type="submit" class="btn btn-lg btn-block" id="submitBtn">Request my free proof</button>
+          <p class="form-fine">No payment now. We'll email a design proof and a quote first.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success modal -->
+  <div class="modal" id="successModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <div class="modal-check">✓</div>
+      <h3 id="modalTitle">Request sent!</h3>
+      <p id="modalBody">Thanks — we've got your puck request and will email you a proof shortly.</p>
+      <button class="btn" id="modalOk">Done</button>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section id="faq" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq">
+        <details>
+          <summary>Is there a minimum order?</summary>
+          <p>No. Order a single puck or a few hundred — there's no minimum quantity.</p>
+        </details>
+        <details>
+          <summary>What kind of pucks are these?</summary>
+          <p>Regulation 3"&times;1", 6&nbsp;oz vulcanized rubber hockey pucks. Great for games, gifts, trophies, team swag, or display.</p>
+        </details>
+        <details>
+          <summary>Do I have to provide finished artwork?</summary>
+          <p>Not at all. Pick one of our designs, upload your own art, or just describe your idea and we'll design it for you. You approve a free proof before paying.</p>
+        </details>
+        <details>
+          <summary>What files can I upload?</summary>
+          <p>PNG, JPG, SVG, or PDF up to 10&nbsp;MB. Higher resolution is better — aim for at least 1000&times;1000&nbsp;px for photos.</p>
+        </details>
+        <details>
+          <summary>How long does it take?</summary>
+          <p>Once you approve the proof, pucks typically ship in 5–7 business days.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="brand">
+        <img src="assets/favicon.svg" alt="" width="30" height="30" />
+        <span>Puck<strong>Lab</strong></span>
+      </div>
+      <p class="muted">Custom designed hockey pucks · made to order · no minimum.</p>
+      <p class="muted small">© <span id="year"></span> Puck Lab. Built for custom puck lovers.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

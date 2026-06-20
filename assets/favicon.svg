@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Puck logo">
+  <defs>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="32" cy="44" rx="26" ry="9" fill="url(#rim)"/>
+  <rect x="6" y="26" width="52" height="18" fill="url(#rim)"/>
+  <ellipse cx="32" cy="26" rx="26" ry="9" fill="#1c1c1c"/>
+  <ellipse cx="32" cy="26" rx="26" ry="9" fill="none" stroke="#ff6d00" stroke-width="2.5"/>
+  <ellipse cx="32" cy="26" rx="13" ry="4.5" fill="none" stroke="#ff6d00" stroke-width="2"/>
+</svg>
